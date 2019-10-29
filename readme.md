@@ -1,4 +1,5 @@
 The decentralized [Sia](https://sia.tech) storage still limited by 40 MiB as the minimum file size (smaller files will get uploaded as 40 MiB).
+
 This small script estimates the Sia size of the given directory (small files scaled up to 40 MiB), calculates the lost space, the average file size, and so on.
 
 Example result:
