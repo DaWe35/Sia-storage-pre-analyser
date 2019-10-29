@@ -7,17 +7,19 @@ def getSize(filename):
     return st.st_size
 
 def human_readable_size(size, decimal_places=3):
-    for unit in ['byte','KB','MB','GB','TB','PB','EB']:
-        if size < 1000.0:
-            break
-        size /= 1000.0
-    return f"{size:.{decimal_places}f} {unit}"
+	if size == 'NaN':
+		return 'NaN'
+	for unit in ['byte','KB','MB','GB','TB','PB','EB']:
+		if size < 1000.0:
+			break
+		size /= 1000.0
+	return f"{size:.{decimal_places}f} {unit}"
 
 def avg(lst):
 	try:
 		return sum(lst) / len(lst)
 	except:
-		return 'N/A'
+		return 'NaN'
 
 
 
@@ -62,12 +64,19 @@ for size in file_sizes:
 
 
 
-
-print(len(file_sizes), 'file scanned from', folder)
-print('Size on disk:', human_readable_size(disk_size))
-print('Size on Sia: ', human_readable_size(sia_size))
+print('Size on')
+print('    Disk:', human_readable_size(disk_size))
+print('    Sia: ', human_readable_size(sia_size))
 print()
-print('Small files (less than 40 MiB):', small_files, '- average:', human_readable_size(avg(small_file_list)))
-print('Large files (greater than 40 MiB):', large_files, '- average:', human_readable_size(avg(large_file_list)))
-print('Average file size:', human_readable_size(avg(file_sizes)))
-print('Median:', human_readable_size(statistics.median(file_sizes)))
+print('Lost space: ', human_readable_size(sia_size-disk_size))
+print('    +' + str(int(sia_size/disk_size*100)-100) + '% empty space used for scaling files up to 40MiB')
+print()
+print('Too small files:', small_files)
+print('    Average:', human_readable_size(avg(small_file_list)))
+print()
+print('Larger files:', large_files)
+print('    Average:', human_readable_size(avg(large_file_list)))
+print()
+print('All files:', len(file_sizes))
+print('    Average:', human_readable_size(avg(file_sizes)))
+print('    Median:', human_readable_size(statistics.median(file_sizes)))
