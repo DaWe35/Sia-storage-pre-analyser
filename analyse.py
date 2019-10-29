@@ -1,6 +1,7 @@
 # !/usr/bin/python
 import os
 import statistics
+import sys
 
 def getSize(filename):
     st = os.stat(filename)
@@ -23,13 +24,23 @@ def avg(lst):
 
 
 
-print('Please input a folder to calculate size:')
 while True:
+	if len(sys.argv) > 1:
+		folder = sys.argv[1]
+		print('Folder', folder)
+		if os.path.isdir(folder):
+			break
+		else:
+			print('Folder not found, please enter a valid path:')
+	else:
+		print('Please input a folder to calculate size:')
+
 	folder = input()
 	if os.path.isdir(folder):
 		break
 	else:
 		print('Folder not found, please enter a valid path:')
+			
 
 file_sizes = []
 
