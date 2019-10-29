@@ -4,13 +4,13 @@ This small script estimates the Sia size of the given directory (small files sca
 
 ## Install & run
 
-First, you need to install python 3.
+- First, you need to install python 3.
 
-Download: `git clone https://github.com/DaWe35/Sia-storage-pre-analyser.git`
+- Download: `git clone https://github.com/DaWe35/Sia-storage-pre-analyser.git`
 
-`cd Sia-storage-pre-analyser`
+- `cd Sia-storage-pre-analyser`
 
-`python analyse.py "your/input/folder"` (Python 3 required)
+- `python analyse.py "your/input/folder"` (Python 3 required)
 
 ### Example result:
 
