@@ -12,6 +12,8 @@ This small script estimates the Sia size of the given directory (small files sca
 
 - `python analyse.py "your/input/folder"` (Python 3 required)
 
+- *For additional output, use -v or --verbose flags*
+
 ### Example result:
 
     Size on

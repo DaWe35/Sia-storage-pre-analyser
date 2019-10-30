@@ -1,7 +1,13 @@
 # !/usr/bin/python
 import os
 import statistics
-import sys
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('input')
+parser.add_argument('-v', '--verbose', action='store_true', 
+	help="Verbose output")
+args = parser.parse_args()
 
 def getSize(filename):
     st = os.stat(filename)
@@ -25,8 +31,8 @@ def avg(lst):
 
 
 while True:
-	if len(sys.argv) > 1:
-		folder = sys.argv[1]
+	if len(args.input) > 1:
+		folder = args.input
 		print('Folder', folder)
 		if os.path.isdir(folder):
 			break
@@ -81,13 +87,14 @@ print('    Sia: ', human_readable_size(sia_size))
 print()
 print('Lost space: ', human_readable_size(sia_size-disk_size))
 print('    +' + str(int(sia_size/disk_size*100)-100) + '% empty space used for scaling files up to 40MiB')
-print()
-print('Too small files:', small_files)
-print('    Average:', human_readable_size(avg(small_file_list)))
-print()
-print('Larger files:', large_files)
-print('    Average:', human_readable_size(avg(large_file_list)))
-print()
-print('All files:', len(file_sizes))
-print('    Average:', human_readable_size(avg(file_sizes)))
-print('    Median:', human_readable_size(statistics.median(file_sizes)))
+if args.verbose:
+	print()
+	print('Too small files:', small_files)
+	print('    Average:', human_readable_size(avg(small_file_list)))
+	print()
+	print('Larger files:', large_files)
+	print('    Average:', human_readable_size(avg(large_file_list)))
+	print()
+	print('All files:', len(file_sizes))
+	print('    Average:', human_readable_size(avg(file_sizes)))
+	print('    Median:', human_readable_size(statistics.median(file_sizes)))
