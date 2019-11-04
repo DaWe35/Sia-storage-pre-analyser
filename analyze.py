@@ -59,25 +59,33 @@ for root, dirs, files in os.walk(folder, topdown=True):
 
 
 
-
+min_file_size = 41943040
 disk_size = 0
 sia_size = 0
-small_files = 0
-large_files = 0
 small_file_list = []
 large_file_list = []
 
+
+
+
 for size in file_sizes:
 	disk_size += size
-	if size < 41943040: #40 MiB
-		sia_size += 41943040
-		small_files += 1
+
+	num_chunks = int(size / min_file_size)
+	print(num_chunks)
+	print(size % min_file_size)
+	if size % min_file_size != 0:
+		num_chunks += 1
+
+	sia_size += num_chunks * min_file_size
+	print(num_chunks * min_file_size)
+
+	if size < min_file_size: #40 MiB
 		small_file_list.append(size)
 	else:
-		sia_size += size
-		large_files += 1
 		large_file_list.append(size)
 	# print(name, '-', size)
+
 
 
 
@@ -86,13 +94,13 @@ print('    Disk:', human_readable_size(disk_size))
 print('    Sia: ', human_readable_size(sia_size))
 print()
 print('Lost space: ', human_readable_size(sia_size-disk_size))
-print('    +' + str(int(sia_size/disk_size*100)-100) + '% empty space used for scaling files up to 40MiB')
+print('    +' + str(int(sia_size/disk_size*100)-100) + '% empty space used for scaling files up to 40MiB chunks')
 if args.verbose:
 	print()
-	print('Too small files:', small_files)
+	print('Too small files:', len(small_file_list))
 	print('    Average:', human_readable_size(avg(small_file_list)))
 	print()
-	print('Larger files:', large_files)
+	print('Larger files:', len(large_file_list))
 	print('    Average:', human_readable_size(avg(large_file_list)))
 	print()
 	print('All files:', len(file_sizes))
