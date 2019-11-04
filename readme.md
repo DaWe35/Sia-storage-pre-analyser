@@ -2,7 +2,15 @@
 
 This small script estimates the Sia size of the given directory (small files scaled up to 40 MiB), calculates the lost space, the average file size, and so on.
 
-## Install & run
+## Run on Windows
+
+- Download the [latest release](https://github.com/DaWe35/Sia-storage-pre-analyser/releases/latest/download/analyze.exe)
+
+- Open CMD
+
+- Type `path/to/analyze.exe "your-folder/to-analyze"`
+
+## Run with Python 3
 
 - First, you need to install python 3.
 
@@ -12,9 +20,9 @@ This small script estimates the Sia size of the given directory (small files sca
 
 - `python analyze.py "your/input/folder"` (Python 3 required)
 
-- *For additional output, use -v or --verbose flags*
-
 ### Example result:
+
+- *For additional output, use -v or --verbose flags*
 
     Size on
         Disk: 29.160 GB
