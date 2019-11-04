@@ -72,19 +72,11 @@ for size in file_sizes:
 	disk_size += size
 
 	num_chunks = int(size / min_file_size)
-	print(num_chunks)
-	print(size % min_file_size)
+
 	if size % min_file_size != 0:
 		num_chunks += 1
 
 	sia_size += num_chunks * min_file_size
-	print(num_chunks * min_file_size)
-
-	if size < min_file_size: #40 MiB
-		small_file_list.append(size)
-	else:
-		large_file_list.append(size)
-	# print(name, '-', size)
 
 
 
@@ -97,12 +89,6 @@ print('Lost space: ', human_readable_size(sia_size-disk_size))
 print('    +' + str(int(sia_size/disk_size*100)-100) + '% empty space used for scaling files up to 40MiB chunks')
 if args.verbose:
 	print()
-	print('Too small files:', len(small_file_list))
-	print('    Average:', human_readable_size(avg(small_file_list)))
-	print()
-	print('Larger files:', len(large_file_list))
-	print('    Average:', human_readable_size(avg(large_file_list)))
-	print()
-	print('All files:', len(file_sizes))
+	print('Files:', len(file_sizes))
 	print('    Average:', human_readable_size(avg(file_sizes)))
 	print('    Median:', human_readable_size(statistics.median(file_sizes)))
