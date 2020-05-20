@@ -2,6 +2,12 @@
 
 This small script estimates the Sia size of the given directory (files will rounded to 40 MiB chunks), calculates the lost space, the average file size, and so on.
 
+## Run in siad
+
+This script is available in siad, so if you have a Sia node, you just need to use this command:
+
+`siac utils uploadedsize [path/to/folder]`
+
 ## Run on Windows
 
 - Download the [latest release](https://github.com/DaWe35/Sia-storage-pre-analyser/releases/latest/download/analyze.exe)
@@ -24,6 +30,7 @@ This small script estimates the Sia size of the given directory (files will roun
 
 - *For additional output, use -v or --verbose flags*
 
+```
     Size on
         Disk: 29.160 GB
         Sia:  33.967 GB
@@ -40,3 +47,4 @@ This small script estimates the Sia size of the given directory (files will roun
     All files: 415
         Average: 70.265 MB
         Median: 35.369 MB
+```
